@@ -1,3 +1,5 @@
+package mlw;
+
 import com.google.common.base.Strings;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -21,8 +23,8 @@ public class MongoDB {
             mongo = new Mongo(mongoProperties.get("host"), parseInt(mongoProperties.get("port")));
         else
             mongo = new Mongo(mongoProperties.get("host"));
-        DB database = mongo.getDB(mongoProperties.get("database"));
 
+        DB database = mongo.getDB(mongoProperties.get("database"));
         if (!Strings.isNullOrEmpty(mongoProperties.get("username")) && !Strings.isNullOrEmpty(mongoProperties.get("password")))
             database.authenticate(mongoProperties.get("username"), mongoProperties.get("password").toCharArray());
         return new MongoDB(database);

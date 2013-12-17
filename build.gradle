@@ -1,4 +1,9 @@
-apply plugin: 'java'
+[
+        'java',
+        'application',
+].each { apply plugin: it }
+
+mainClassName = "mlw.Main"
 
 repositories {
     mavenCentral()

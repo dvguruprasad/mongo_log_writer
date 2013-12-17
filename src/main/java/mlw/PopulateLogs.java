@@ -1,15 +1,15 @@
+package mlw;
+
 import com.google.common.base.Function;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
 
 import static com.google.common.base.Functions.compose;
-import static com.google.common.collect.ImmutableMap.of;
 
-public class PopulateLogs implements Function<Map<String, Object>, Map<String, Object>> {
+public class PopulateLogs implements Function<String, Void> {
     private AddToLogs addToLogs;
     private ToLogEntry toLogEntry;
 
@@ -19,9 +19,9 @@ public class PopulateLogs implements Function<Map<String, Object>, Map<String, O
     }
 
     @Override
-    public Map<String, Object> apply(Map<String, Object> input) {
+    public Void apply(String logDirectoryPath) {
         try {
-            File logDirectory = new File((String) input.get("logFileDirectory"));
+            File logDirectory = new File(logDirectoryPath);
             File[] logFiles = logDirectory.listFiles();
             for (File logFile : logFiles) {
                 BufferedReader br = new BufferedReader(new FileReader(logFile));
@@ -35,6 +35,6 @@ public class PopulateLogs implements Function<Map<String, Object>, Map<String, O
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return of();
+        return null;
     }
 }
